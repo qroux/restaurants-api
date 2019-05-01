@@ -1,2 +1,75 @@
 <h1>Pages#home</h1>
 <p>Find me in app/views/pages/home.html.erb</p>
+
+<div id="db">
+  <h2>Visuel de la base de donnée gérée par l'API rest</h2>
+  <div>
+    <ul>
+      <% @restaurants.each do |restaurant|  %>
+        <li class="resto">
+          nom du restaurant : <%= restaurant.name %> <br>
+          adresse:<%= restaurant.address %>
+        </li>
+    <% end %>
+    </ul>
+  </div>
+</div>
+
+
+<div>
+  <h1>Mode d'emploi</h1>
+
+<ul>
+  <li>la base de donnée n'est accessible que par l'api</li>
+  <li>l'api gère les requetes get, create, patch et destroy</li>
+  <li>toute requête nécessite un token d'identification, créé automatiquement à la création du compte utilisateur</li>
+</ul>
+
+
+<div>
+  <h3>requête /GET</h3>
+  <p>
+    curl -i -X GET                                 \
+         -H 'X-User-Email: adresse@utilisateur.com'         \
+         -H 'X-User-Token: votre_token'    \
+          http://localhost:3000/api/v1/restaurants
+  </p>
+</div>
+<div>
+  <h3>requête /PATCH</h3>
+  <p>
+    curl -i -X PATCH
+          -H 'Content-Type: application/json'                                 \
+         -H 'X-User-Email: adresse@utilisateur.com'         \
+         -H 'X-User-Token: votre_token'    \
+         -d '{ "restaurant": { "name": "New name", "address": "Paris" } }' \
+              http://localhost:3000/api/v1/restaurants
+  </p>
+</div>
+<div>
+  <h3>requête /POST</h3>
+  <p>
+    curl -i -X POST
+          -H 'Content-Type: application/json'                                 \
+         -H 'X-User-Email: adresse@utilisateur.com'         \
+         -H 'X-User-Token: votre_token'    \
+         -d '{ "restaurant": { "name": "New restaurant", "address": "Paris" } }' \
+              http://localhost:3000/api/v1/restaurants
+  </p>
+</div>
+<div>
+  <h3>requête /DELETE</h3>
+  <p>
+    curl -i -X DELETE                               \
+         -H 'X-User-Email: adresse@utilisateur.com'         \
+         -H 'X-User-Token: votre_token'    \
+         http://localhost:3000/api/v1/restaurants/idDuRestaurant
+  </p>
+</div>
+
+</div>
+
+
+
+
+
